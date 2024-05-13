@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useUpdateReplyMutation } from "../slices/CommentReplyApiSlice";
+import { useDeleteReplyMutation, useUpdateReplyMutation } from "../slices/CommentReplyApiSlice";
 import { VscEdit } from "react-icons/vsc";
 
 import {
@@ -10,17 +10,22 @@ import {
   MdSend,
   MdCancelScheduleSend,
 } from "react-icons/md";
+import Confirm from "./ui/Confirm";
 
 const Reply = ({ rply, alldata }) => {
   const { createdAt, name } = alldata.replies;
 
   const [showReply, setShowReply] = useState("false");
   const [replyValue, setReplyValue] = useState("");
+  const [showModal,setShowModal]=useState(false)
+
   const toggleReply = async () => {
     setShowReply((showEdit) => !showEdit);
     setReplyValue(rply.reply);
   };
   const [updateReply] = useUpdateReplyMutation();
+  const [deleteReply] = useDeleteReplyMutation();
+
 
   const toggleRply = () => {
     setShowReply((showEdit) => !showEdit);
@@ -43,8 +48,34 @@ const Reply = ({ rply, alldata }) => {
     }
     setShowReply((showEdit) => !showEdit);
   };
+  
+  const deleteHandler=async()=>{
+    setShowModal(true)
+      }
+    
+      const handleCancel = () =>    setShowModal(false);
+     const handleDelete = async() => {
+       
+       const deletedata={
+      name:rply.name,
+      postId:alldata.postId, 
+      commentId:rply.commentId,
+      replied_By:rply.replied_By, 
+      replyId:rply._id,
+      reply:rply.reply
+    }
+    console.log(deletedata)
+    // try {
+    //   await deleteReply(deletedata)
+    // } catch (err) {
+    //   console.log("singleBlog delete reply catch" + err?.data?.message || err)
+    // }
+    setShowModal(false)
+  } 
   return (
     <>
+{showModal && <Confirm showModal={showModal} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
+
       <div className=" ml-5 mt-2 d-flex w-75 flex-direction-row justify-content-between ">
         <div className="   d-flex w-75 flex-direction-row  justify-content-start align-items-center ">
           <img style={{ height: 15, width: 15 }} src="/favicon.ico" alt="" />
@@ -62,7 +93,7 @@ const Reply = ({ rply, alldata }) => {
           <div className="" onClick={toggleReply}>
             <VscEdit />
           </div>
-          <div>
+          <div onClick={deleteHandler}>
             <MdDeleteOutline />
           </div>
           <div

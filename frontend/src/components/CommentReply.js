@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap";
+import { Button,  Form, Row } from "react-bootstrap";
 import Reply from "./Reply";
 import ".././App.css";
 import { VscEdit } from "react-icons/vsc";
@@ -7,7 +7,10 @@ import {MdThumbUpOffAlt ,MdThumbDownOffAlt , MdOutlineEdit,MdDeleteOutline ,MdOu
 import {
   useCreateReplyMutation,
   useUpdateCommentMutation,
+  useDeleteCommentMutation,
+  useDeleteReplyMutation
 } from "../slices/CommentReplyApiSlice";
+import Confirm from "./ui/Confirm";
 
 const CommentReply = ({ commentData }) => {
 
@@ -15,6 +18,7 @@ const CommentReply = ({ commentData }) => {
   const { name, createdAt } = commentData;
   const userComment = commentData.comment;
   const [show, setShow] = useState("false");
+  const [showModal,setShowModal]=useState(false)
   const [showEdit, setShowEdit] = useState("false");
   const [editValue, setEditValue] = useState("");
   const [newReply, setNewReply] = useState("");
@@ -22,6 +26,7 @@ const CommentReply = ({ commentData }) => {
 
   const [updateComment] = useUpdateCommentMutation();
   const [createReply] = useCreateReplyMutation();
+  const [deleteComment] = useDeleteCommentMutation();
   const [newComment, setNewComment] = useState();
   
   const toggle = () => {
@@ -48,6 +53,7 @@ const CommentReply = ({ commentData }) => {
     }
     setShowEdit((showEdit) => !showEdit);
   };
+  
 
   const replySubmitHandler = async () => {
     try {
@@ -66,6 +72,29 @@ const CommentReply = ({ commentData }) => {
     setNewReply("");
     setShow((show) => !show);
   };
+  
+    
+  
+  const deleteHandler=async()=>{
+setShowModal(true)
+  }
+
+  const handleCancel = () =>    setShowModal(false);
+ const handleDelete = async() => {
+   
+   const deletedata={
+     postId:commentData.postId, 
+     comment_By:commentData.comment_By, 
+     commentId:commentData._id,
+     comment:commentData.comment,
+   }
+   console.log(deletedata)
+    //  try {
+   //   await deleteComment(deletedata)
+   // } catch (err) {
+   //   console.log("singleBlog delete catch" + err?.data?.message || err)
+   // }
+   setShowModal(false);} 
   return (
     <>
     
@@ -83,7 +112,7 @@ const CommentReply = ({ commentData }) => {
             <Button style={{ cursor:"pointer"}}className="btn btn-primary" onClick={toggleEdit}>
               <span>{<VscEdit/>}</span>
             </Button>
-            <Button style={{ marginLeft: "5px" }} className="btn btn-danger"><MdDeleteOutline /></Button>
+            <Button style={{ marginLeft: "5px" }} className="btn btn-danger" onClick={(c)=>deleteHandler(c)}><MdDeleteOutline /></Button>
           </div>
         </div>
         
@@ -118,7 +147,7 @@ const CommentReply = ({ commentData }) => {
             <MdCancelScheduleSend   />
           </Button>
         </div>
-
+{showModal && <Confirm showModal={showModal} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
         <div className=" d-flex w-75  flex-direction-row justify-content-start ">
           <div className=" d-flex flex-direction-row justify-content-between ">
             {/* <div className="mx-2">Likes</div> <div className="mx-2">shares</div> */}

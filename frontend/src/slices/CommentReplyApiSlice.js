@@ -9,7 +9,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
 
         getComments:builder.query({
             query: (postId)=>({
-                url:`localhost:5000/api/posts/${postId}/comments`,
+                url:`api/posts/${postId}/comments`,
                 method:'GET',
             })    
         }),
@@ -30,8 +30,8 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
             }) 
         }),
         deleteComment:builder.mutation({
-            query: (commentId,data)=>({
-                url:`/comments/${commentId}`,
+            query: (data)=>({
+                url:`api/posts/comments/${data.commentId}`,
                 method:'DELETE',
                 body:data,
             }) 
@@ -60,7 +60,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         deleteReply:builder.mutation({
             query: (data)=>({
-                url:`${data.commentId}/replies`,
+                url:`api/posts/${data.commentId}/replies`,
                 method:'DELETE',
                 body:data,
 

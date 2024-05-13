@@ -34,7 +34,14 @@
  }
  .app__header :Link, h3{
   text-decoration: none;
-color:black; }
+color:black; transition: 0.3s;}
+
+.logoBlog {
+  
+  background: linear-gradient(45deg,#81dce8, #2a7cf8,#0f3368);
+  background-clip: text;
+  color: transparent;
+}
  .app__loginContainer{
    display: flex;
    flex-direction: row;
@@ -42,10 +49,15 @@ color:black; }
    padding: 2px;
    align-items: center;
  }
- .app__loginContainer div{
-   margin: 2px;
-   padding: 2px;
- }
+ 
+ 
+  .app__loginContainer a:hover{
+  border: 1px;
+  border-radius: 8px;
+  background-color: #2a7cf8;
+  color: white !important;
+  cursor: pointer;
+}
  .show_reply{
   background-color: Transparent;
   background-repeat:no-repeat;
@@ -59,11 +71,58 @@ color:black; }
 }
 .upc{
   position: relative;
+  
 }
 .UploadBlogContainer{
   position:fixed !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-
+  transition: 0.3s;
   /* top:25%; */
+  padding: 0 8px ;
   right: 2%;
+  color: rgb(5, 104, 5);
+}
+.UploadBlogContainer:hover{
+  /* background-color: #2a7cf8; */
+  background-color: rgb(5, 104, 5);
+  padding:0 8px;
+  border-radius: 3px;
+  color: white;
+}
+.tagContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+  align-items: center;
+}
+.tags{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 70ch;
+  white-space: nowrap;
+  width:75px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+.tags:hover{
+  border: none;
+  background-color: #2a7cf8;
+  
+  color: white;
+  cursor: pointer;
+}
+.tags.active{
+  border: none;
+  background-color: #2a7cf8;
+  color: white;
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 
 import CommentReply from "../components/CommentReply";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetBlogsQuery } from "../slices/blogApiSlice";
 import { useCreateCommentsMutation } from "../slices/CommentReplyApiSlice";
@@ -18,6 +18,8 @@ const SingleBlog = (props) => {
   const [newComment, setNewComment] = useState();
 
   const { id } = useParams();
+
+  const navigate=useNavigate()
 
   const [createComments] = useCreateCommentsMutation() || {};
   let getBlog=[]
@@ -41,28 +43,29 @@ const date=getBlog?.[0].createdAt
       }
     }
   };
+  const logoHandle = () => navigate("/allblogs");
 
   return (
     <>
       <div className="">
       <div className="container-fluid app__header">
         <div>
-          <h3>Blog</h3>
+          <h3 className="logoBlog" style={{ cursor: "pointer" }} onClick={logoHandle}>Blog</h3>
         </div>
         
 
         {userInfo?.userName ? (
           // <div onClick={() => auth.signOut()}>Logout</div>
           <div className="app__loginContainer">
-            <div>{userInfo.userName}</div>
-            <div>Logout</div><span><MdLogout /></span>
+            <div style={{cursor:"pointer",margin: "2px", padding: "8px"}}>{userInfo.userName}</div>
+            <div style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Logout</div><span><MdLogout /></span>
           </div>
         ) : (
           <div className="app__loginContainer">
             {/* <div onClick={() => setOpen(true)}>Login</div>
             <div onClick={() => setRegisterOpen(true)}>Sign Up</div> */}
-            <div>Login</div>
-            <div>Sign Up</div>
+            <Link to={'/'} style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Login</Link>
+            <Link  to={'/register'} style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Sign Up</Link>
           </div>
         )}
       </div>
@@ -158,12 +161,13 @@ const date=getBlog?.[0].createdAt
                   </div>
                 </div>
                           <h3 className="mt-5 poppin">Comments and Replies</h3>
+              {!getBlog?.[0]?.comments.length>0 &&<div className="mt-3 ms-1 poppin">No Comments yet.... Be the First one to comment.....</div>}
 </div>
 
             </div>
             {!isError &&
               !isLoading &&
-              getBlog[0].comments.map((data, index) => (
+              getBlog?.[0]?.comments.map((data, index) => (
                 <CommentReply key={index} commentData={data} />
               ))}
           </div>
