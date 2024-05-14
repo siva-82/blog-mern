@@ -6,7 +6,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         login: builder.mutation({
             query: (data)=>({
-                url:`${USERS_URL}/auth`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/auth`,
                 method:'POST',
                 body:data,
 
@@ -14,13 +14,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         logout:builder.mutation({
             query:()=>({
-                url: `${USERS_URL}/logout`, 
+                url: `${process.env.REACT_APP_BACKEND_URL}${USERS_URL}/logout`, 
                 method:'POST'
             })
         }),
         register:builder.mutation({
             query:(data)=>({
-                url:`${USERS_URL}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}${USERS_URL}`,
                 method:'POST',
                 body:data,
             })

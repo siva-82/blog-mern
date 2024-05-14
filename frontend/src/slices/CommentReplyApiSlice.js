@@ -9,7 +9,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
 
         getComments:builder.query({
             query: (postId)=>({
-                url:`api/posts/${postId}/comments`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${postId}/comments`,
                 method:'GET',
             }), 
             providesTags:['Comments']

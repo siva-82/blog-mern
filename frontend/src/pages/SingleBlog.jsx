@@ -36,14 +36,16 @@ const date=getBlog?.[0].createdAt
         userName: getBlog?.[0]?.name,
         userId: getBlog?.[0]?.user,
       };
-  console.log(commentData);
+  
       try {
         const res = await createComments(commentData);
-        console.log(res)
+        // console.log(res)
         toast.success(res.data.message)
+
       } catch (err) {
         console.log("singleBlog catch" + err?.data?.message || err);
       }
+      setNewComment("")
     }
   };
   const logoHandle = () => navigate("/allblogs");
