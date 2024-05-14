@@ -3,7 +3,7 @@ import { Button, } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 
 
-const Confirm = ({showModal, handleCancel ,handleDelete}) => {
+const Confirm = ({showModal, handleCancel ,handleDelete,data}) => {
     
   
   return (
@@ -11,7 +11,7 @@ const Confirm = ({showModal, handleCancel ,handleDelete}) => {
         <Modal.Header >
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are You Sure to Delete this </Modal.Body>
+        <Modal.Body>Are You Sure to Delete this {data} </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCancel}>
             Cancel

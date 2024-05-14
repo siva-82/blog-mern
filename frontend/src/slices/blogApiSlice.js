@@ -12,7 +12,8 @@ export const blogApiSlice = apiSlice.injectEndpoints({
             query: ()=>({
                 url:'/api/posts',
                 method:'GET',
-            })
+            }),
+            providesTags:['Comments']
         }),
 
         getBlogSearch: builder.query({
@@ -36,7 +37,8 @@ export const blogApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data,
                 formData:true                                 
-            })
+            }),
+            invalidatesTags:['Comments']
         }),
 
         editBlog:builder.mutation({

@@ -9,6 +9,7 @@ import { useCreateCommentsMutation } from "../slices/CommentReplyApiSlice";
 import ".././App.css";
 
 import { MdThumbUpOffAlt ,MdThumbDownOffAlt, MdLogout } from "react-icons/md"
+import { toast } from "react-toastify";
 
 const SingleBlog = (props) => {
   const { userInfo, isLoadingUser } = useSelector((state) => state.auth);
@@ -38,6 +39,8 @@ const date=getBlog?.[0].createdAt
   console.log(commentData);
       try {
         const res = await createComments(commentData);
+        console.log(res)
+        toast.success(res.data.message)
       } catch (err) {
         console.log("singleBlog catch" + err?.data?.message || err);
       }

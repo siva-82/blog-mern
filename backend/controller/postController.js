@@ -8,14 +8,13 @@ import { response } from "express";
 // @access  Public
 const getPosts = asyncHandler(async (req, res) => {
   const post = await Post.find({});
-  console.log("getposts");
+  
   res.status(200).json(post);
 });
 
 const getSinglePost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id);
-  console.log("getsingleposts");
-  console.log("paramid" + req.params.id);
+
   res.status(200).json(post);
 });
 
@@ -23,13 +22,9 @@ const getSinglePost = asyncHandler(async (req, res) => {
 // @route   POST /api/posts/:post_id/comment
 // @access  Private
 const createComment = asyncHandler(async (req, res) => {
-  console.log("createcomment");
-  console.log(req.body);
- 
-  console.log(req.params);
+  
 
   const { comment, userName, userId } = req.body;
-  console.log(req.params.post_id, comment, userName, userId);
 
   const post = await Post.findById(req.params.post_id);
   
@@ -56,10 +51,7 @@ const createComment = asyncHandler(async (req, res) => {
 // @route   PUT /api/posts/:post_id/comment
 // @access  Private/Admin
 const updateComment = asyncHandler(async (req, res) => {
-  console.log("updateComment");
  
-  console.log(req.body);
-  console.log(req.params);
 
   const post = await Post.findById(req.body.postId);
 
@@ -80,6 +72,7 @@ const updateComment = asyncHandler(async (req, res) => {
 // @route   DELETE /api/posts/:id
 // @access  Private/Admin
 const deleteComment = asyncHandler(async (req, res) => {
+  
   const posts = await Post.findById(req.body.postId);
 
   if(posts){
@@ -87,12 +80,11 @@ const deleteComment = asyncHandler(async (req, res) => {
     cmtt.deleteOne({id:req.params.commentId})
     
   
-    console.log('post')
-    console.log(posts)
+   
     await posts.save()
      res.json({ message: "Comment Deleted" })
 
-  }
+  // }
 //   if (comments) {
     // await Post.updateOne(
     //   { _id: req.body.postId },
@@ -101,8 +93,8 @@ const deleteComment = asyncHandler(async (req, res) => {
     // );
 
     
-//     res.json({ message: "Comment Deleted" });
-//   }
+    res.json({ message: "Comment Deleted" });
+  }
    else {
     res.status(404);
     throw new Error("Comment not found");
@@ -113,20 +105,17 @@ const deleteComment = asyncHandler(async (req, res) => {
 // @route   POST /api/posts/post_id/:comment_id/reply
 // @access  Private
 const createReply = asyncHandler(async (req, res) => {
-  console.log("createReply")
-  console.log(req.body)
+  
   const { reply, postId, commentId, name, replied_By } = req.body;
-  console.log(reply, postId, commentId, name, replied_By,req.params.comment_id )
   const commentParam = req.params.comment_id;
   const post = await Post.findById(postId);
 
-  console.log("post.comment find by id ", post);
+
 
   if (post) {
-    console.log("commentId ", req.params.comment_id);
+    
     const commentId = await post.comments.find((d) => d.id === commentParam);
-    console.log("commentId");
-    console.log(commentId);
+   
     if (commentId) {
       const userReply = {
         postId: postId,
@@ -136,7 +125,7 @@ const createReply = asyncHandler(async (req, res) => {
         reply,
       };
 
-      console.log(userReply);
+      
 
       commentId.replies.push(userReply);
 
@@ -152,8 +141,7 @@ const createReply = asyncHandler(async (req, res) => {
 // @route   PUT /api/:postId/reply/:id
 // @access  Private/Admin
 const updateReply = asyncHandler(async (req, res) => {
-  console.log("createReply")
-  console.log(req.body)
+ 
   
   const post = await Post.findById(req.body.postId);
 
@@ -178,6 +166,7 @@ const updateReply = asyncHandler(async (req, res) => {
 // @route   DELETE /api/posts/:id
 // @access  Private/Admin
 const deleteReply = asyncHandler(async (req, res) => {
+  
   const post = await Post.findById(req.body.postId);
 
   const comment = post.comments.find((d) => d.id === req.body.commentId);
@@ -218,8 +207,7 @@ const deletePost = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updatePost = asyncHandler(async (req, res) => {
   const { name, image, description } = req.body;
-  console.log("updatePost");
-  console.log(name, image, description);
+  
 
   const post = await Post.findById(req.param.id);
 

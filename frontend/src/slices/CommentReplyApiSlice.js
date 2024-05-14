@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice'
-const BLOG_COMMENT_URL='/api/posts/';
+const BLOG_COMMENT_URL='api/posts/';
 
 console.log("commentReplyApiSlice")
 export const commentReplyApiSlice=apiSlice.injectEndpoints({
@@ -11,7 +11,8 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
             query: (postId)=>({
                 url:`api/posts/${postId}/comments`,
                 method:'GET',
-            })    
+            }), 
+            providesTags:['Comments']
         }),
         createComments:builder.mutation({
             query: (data)=>({
@@ -19,22 +20,27 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 method:'POST',
                 body:data,
 
-            }) 
+            }) ,
+            invalidatesTags:['Comments']
         }),
         updateComment:builder.mutation({
             query: (data)=>({
                 url:`/api/posts/comments/${data.commentId}`,
                 method:'PUT',
                 body:data,
+            }),
+            invalidatesTags:['Comments']
 
-            }) 
         }),
         deleteComment:builder.mutation({
             query: (data)=>({
-                url:`api/posts/comments/${data.commentId}`,
+                url:`/api/posts/comments/${data.commentId}`,
                 method:'DELETE',
                 body:data,
-            }) 
+           
+            }) ,
+            invalidatesTags:['Comments']
+
         }),
         getReply:builder.query({
             query: (commentId)=>({
@@ -48,7 +54,9 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 method:'PUT',
                 body:data,
 
-            }) 
+            }), 
+            invalidatesTags:['Reply']
+
         }),
         updateReply:builder.mutation({
             query: (data)=>({
@@ -56,15 +64,18 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 method:'PUT',
                 body:data,
 
-            }) 
+            }), 
+            invalidatesTags:['Reply'] 
         }),
         deleteReply:builder.mutation({
             query: (data)=>({
-                url:`api/posts/${data.commentId}/replies`,
+                url:`/api/posts/replies/${data.replyId}`,
                 method:'DELETE',
                 body:data,
 
-            }) 
+            }), 
+            invalidatesTags:['posts'] 
+           
         })
 
     })

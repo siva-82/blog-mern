@@ -11,9 +11,14 @@ import {
   MdCancelScheduleSend,
 } from "react-icons/md";
 import Confirm from "./ui/Confirm";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Reply = ({ rply, alldata }) => {
   const { createdAt, name } = alldata.replies;
+
+  const { userInfo, isLoadingUser } = useSelector((state) => state.auth);
+
 
   const [showReply, setShowReply] = useState("false");
   const [replyValue, setReplyValue] = useState("");
@@ -49,32 +54,59 @@ const Reply = ({ rply, alldata }) => {
     setShowReply((showEdit) => !showEdit);
   };
   
-  const deleteHandler=async()=>{
-    setShowModal(true)
-      }
+  
+  // const replyDelete=async()=>{
+  //   console.log("reply delete")
+  //   try {
+   
+  //     const deletedata={
+       
+  //       postId:alldata.postId, 
+  //       commentId:rply.commentId,
+  //       replied_By:rply.replied_By, 
+  //       userId:userInfo._id, 
+  //       replyId:rply._id,
+  //       reply:rply.reply
+  //     }
+  //     console.log(deletedata)
+  
+  //      const res= await deleteReply(deletedata)
+      
+  //      toast.success(res.data.message)
+  //     } catch (err) {
+  //       console.log("singleBlog delete catch " + err?.data?.message || err)
+  //     }
+  // }
+  
     
       const handleCancel = () =>    setShowModal(false);
      const handleDelete = async() => {
        
-       const deletedata={
-      name:rply.name,
-      postId:alldata.postId, 
-      commentId:rply.commentId,
-      replied_By:rply.replied_By, 
-      replyId:rply._id,
-      reply:rply.reply
-    }
-    console.log(deletedata)
-    // try {
-    //   await deleteReply(deletedata)
-    // } catch (err) {
-    //   console.log("singleBlog delete reply catch" + err?.data?.message || err)
-    // }
+      console.log("handleDelete reply delete")
+      try {
+     
+        const deletedata={
+         
+          postId:alldata.postId, 
+          commentId:rply.commentId,
+          replied_By:rply.replied_By, 
+          userId:userInfo._id, 
+          replyId:rply._id,
+          reply:rply.reply
+        }
+        console.log(deletedata)
+    
+         const res= await deleteReply(deletedata)
+        
+         toast.success(res.data.message)
+        } catch (err) {
+          console.log("singleBlog delete catch " + err?.data?.message || err)
+        }
     setShowModal(false)
   } 
   return (
     <>
-{showModal && <Confirm showModal={showModal} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
+{showModal && <Confirm showModal={showModal} data={"Reply"} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
 
       <div className=" ml-5 mt-2 d-flex w-75 flex-direction-row justify-content-between ">
         <div className="   d-flex w-75 flex-direction-row  justify-content-start align-items-center ">
@@ -90,10 +122,10 @@ const Reply = ({ rply, alldata }) => {
         </div>
 
         <div className=" d-flex flex-row  justify-content-end align-items-center">
-          <div className="" onClick={toggleReply}>
+          <div className="" onClick={toggleReply} >
             <VscEdit />
           </div>
-          <div onClick={deleteHandler}>
+          <div onClick={()=>setShowModal(true)}>
             <MdDeleteOutline />
           </div>
           <div

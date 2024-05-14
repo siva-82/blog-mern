@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { Button,  Form, Row } from "react-bootstrap";
+import Confirm from "./ui/Confirm";
 import Reply from "./Reply";
-import ".././App.css";
-import { VscEdit } from "react-icons/vsc";
-import {MdThumbUpOffAlt ,MdThumbDownOffAlt , MdOutlineEdit,MdDeleteOutline ,MdOutlineModeComment,MdSend,MdCancelScheduleSend    } from "react-icons/md"
+import { toast } from "react-toastify";
 import {
   useCreateReplyMutation,
   useUpdateCommentMutation,
   useDeleteCommentMutation,
   useDeleteReplyMutation
 } from "../slices/CommentReplyApiSlice";
-import Confirm from "./ui/Confirm";
+
+import { Button,  Form, Row } from "react-bootstrap";
+import ".././App.css";
+import { VscEdit } from "react-icons/vsc";
+import {MdThumbUpOffAlt ,MdThumbDownOffAlt , MdOutlineEdit,MdDeleteOutline ,MdOutlineModeComment,MdSend,MdCancelScheduleSend    } from "react-icons/md"
+import { useSelector } from "react-redux";
+
 
 const CommentReply = ({ commentData }) => {
 
+  const { userInfo, isLoadingUser } = useSelector((state) => state.auth);
 
   const { name, createdAt } = commentData;
   const userComment = commentData.comment;
@@ -28,6 +33,7 @@ const CommentReply = ({ commentData }) => {
   const [createReply] = useCreateReplyMutation();
   const [deleteComment] = useDeleteCommentMutation();
   const [newComment, setNewComment] = useState();
+  
   
   const toggle = () => {
     setShow((show) => !show);
@@ -46,10 +52,11 @@ const CommentReply = ({ commentData }) => {
         postId: commentData?.postId,
         commentId: commentData?._id,
       };
-      const res = await updateComment(updatedValue);
-      console.log(res);
+      let res = await updateComment(updatedValue);
+      console?.log("res");
+      console?.log(res);
     } catch (err) {
-      console.log("singleBlog catch" + err?.data?.message || err);
+      toast.error( err?.data?.message || err);
     }
     setShowEdit((showEdit) => !showEdit);
   };
@@ -64,8 +71,12 @@ const CommentReply = ({ commentData }) => {
         name: commentData?.name,
         reply: newReply,
       };
-
+console.log("commentData")
+console.log(commentData)
       const res = await createReply(updatedValue);
+      console.log(res)
+      toast.success(res.data)
+
     } catch (err) {
       console.log("singleBlog catch" + err?.data?.message || err);
     }
@@ -75,25 +86,50 @@ const CommentReply = ({ commentData }) => {
   
     
   
-  const deleteHandler=async()=>{
-setShowModal(true)
-  }
+  // const deleteHandler=async()=>{
+  //   try {
+   
+  //     const deletedata={
+  //       postId:commentData.postId, 
+  //       comment_By:commentData.comment_By,
+  //       userId: commentData.comment_By,
+  //       name: commentData?.name,
+  //       commentId:commentData._id,
+  //       comment:commentData.comment,
+  //     }
+  //     console.log("commentData")
+  //  console.log(commentData)
+     
+  //       const res =await deleteComment(deletedata).unwrap()
+  //       console.log(res)
+  //       toast.success(res.message)
+  //     } catch (err) {
+  //       console.log("singleBlog delete catch" + err?.data?.message || err)
+  //     }
+  //   setShowModal(false)
+  // }
 
   const handleCancel = () =>    setShowModal(false);
  const handleDelete = async() => {
+  try {
    
-   const deletedata={
-     postId:commentData.postId, 
-     comment_By:commentData.comment_By, 
-     commentId:commentData._id,
-     comment:commentData.comment,
-   }
-   console.log(deletedata)
-    //  try {
-   //   await deleteComment(deletedata)
-   // } catch (err) {
-   //   console.log("singleBlog delete catch" + err?.data?.message || err)
-   // }
+    const deletedata={
+      postId:commentData.postId, 
+      comment_By:commentData.comment_By,
+      userId: commentData.comment_By,
+      name: commentData?.name,
+      commentId:commentData._id,
+      comment:commentData.comment,
+    }
+    console.log("commentData")
+ console.log(commentData)
+   
+      const res =await deleteComment(deletedata).unwrap()
+      console.log(res)
+      toast.success(res.message)
+    } catch (err) {
+      console.log("singleBlog delete catch" + err?.data?.message || err)
+    }
    setShowModal(false);} 
   return (
     <>
@@ -112,7 +148,7 @@ setShowModal(true)
             <Button style={{ cursor:"pointer"}}className="btn btn-primary" onClick={toggleEdit}>
               <span>{<VscEdit/>}</span>
             </Button>
-            <Button style={{ marginLeft: "5px" }} className="btn btn-danger" onClick={(c)=>deleteHandler(c)}><MdDeleteOutline /></Button>
+            <Button style={{ marginLeft: "5px" }} className="btn btn-danger" onClick={()=>setShowModal(true)}><MdDeleteOutline /></Button>
           </div>
         </div>
         
@@ -147,7 +183,7 @@ setShowModal(true)
             <MdCancelScheduleSend   />
           </Button>
         </div>
-{showModal && <Confirm showModal={showModal} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
+{showModal && <Confirm showModal={showModal} data={"Comment"} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
         <div className=" d-flex w-75  flex-direction-row justify-content-start ">
           <div className=" d-flex flex-direction-row justify-content-between ">
             {/* <div className="mx-2">Likes</div> <div className="mx-2">shares</div> */}

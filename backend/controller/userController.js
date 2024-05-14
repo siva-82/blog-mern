@@ -5,8 +5,7 @@ import User from '../models/userModel.js';
 
 
 const authUser = asyncHandler(async(req,res)=>{
-console.log("authUser");
-console.log(req.body);
+
     const {email,password}=req.body;
 console.log(email,password)
     const user= await User.findOne({email})
@@ -32,7 +31,7 @@ const registerUser = asyncHandler(async(req,res)=>{
     
     // const userExist = await User.findOne({$or: [ { email: email },{ userName: userName }]})
      const userExist = await User.findOne({email})
-    //  console.log(userExist)
+   
 
     if(userExist){
         res.status(400);
