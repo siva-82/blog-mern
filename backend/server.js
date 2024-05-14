@@ -20,6 +20,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
+app.set("trust proxy", 1)
+
 app.use('/api/users',userRoutes)
 app.use('/api/posts',postRoutes)
 app.use('/api/upload',uploadRoutes)
