@@ -16,7 +16,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         createComments:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/${data.id}/comments`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${data.id}/comments`,
                 method:'POST',
                 body:data,
 
@@ -25,7 +25,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         updateComment:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/comments/${data.commentId}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/comments/${data.commentId}`,
                 method:'PUT',
                 body:data,
             }),
@@ -34,7 +34,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         deleteComment:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/comments/${data.commentId}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/comments/${data.commentId}`,
                 method:'DELETE',
                 body:data,
            
@@ -44,13 +44,13 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         getReply:builder.query({
             query: (commentId)=>({
-                url:`${commentId}/replies`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/${commentId}/replies`,
                 method:'GET',
             })    
         }),
         createReply:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/${data.commentId}/replies`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${data.commentId}/replies`,
                 method:'PUT',
                 body:data,
 
@@ -60,7 +60,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         updateReply:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/replies/${data.replyId}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/replies/${data.replyId}`,
                 method:'PUT',
                 body:data,
 
@@ -69,7 +69,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
         }),
         deleteReply:builder.mutation({
             query: (data)=>({
-                url:`/api/posts/replies/${data.replyId}`,
+                url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/replies/${data.replyId}`,
                 method:'DELETE',
                 body:data,
 
