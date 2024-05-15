@@ -27,6 +27,8 @@ const SingleBlog = (props) => {
   getBlog = allBlogs?.filter((blogs) => blogs?._id?.includes(id));
 //  const {createdAt,name,user}=getBlog?.map((a,b,c)=>a.createdAt,b.name,c.user)
 const date=getBlog?.[0].createdAt
+const name=getBlog?.[0].name
+const title=getBlog?.[0].description
 
   const handleComment = async (e) => {
     if(newComment!=="" || newComment!==undefined){
@@ -79,10 +81,10 @@ const date=getBlog?.[0].createdAt
         <div className=" row">
         
           <div className="maxWidth d-flex  flex-column my-auto justify-content-center align-items-start">
-            <div className="col-lg-12 col-md-6 col-sm-6 mb-1 mx-auto">
+            <div className="col-lg-12 col-md-12 col-sm-6 mb-1 mx-auto">
               <div className="mt-4 d-flex flex-column mx-auto justify-content-center align-items-center">
                 <div className=" w-75 ">
-                  <h2 className="poppin"> Title of {id}</h2>
+                  <h2 className="poppin" style={{ textTransform: "capitalize"}}> {title} by  {name}</h2>
                   <p className="poppin"style={{ color: "grey" }}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Debitis iusto eos at eaque eligendi quam, numquam voluptate
@@ -101,6 +103,7 @@ const date=getBlog?.[0].createdAt
                     {new Date(date).toDateString()}
                   </p>
                   <p
+                  className="mq-480"
                     style={{
                       color: "grey",
                       

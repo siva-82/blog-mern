@@ -12,7 +12,7 @@ import {
 import { Button,  Form, Row } from "react-bootstrap";
 import ".././App.css";
 import { VscEdit } from "react-icons/vsc";
-import {MdThumbUpOffAlt ,MdThumbDownOffAlt , MdOutlineEdit,MdDeleteOutline ,MdOutlineModeComment,MdSend,MdCancelScheduleSend    } from "react-icons/md"
+import {MdThumbUpOffAlt ,MdThumbDownOffAlt ,MdDeleteOutline ,MdOutlineModeComment,MdSend,MdCancelScheduleSend    } from "react-icons/md"
 import { useSelector } from "react-redux";
 
 
@@ -140,15 +140,15 @@ console.log(commentData)
           <div className="   d-flex  flex-direction-row  justify-content-between align-items-center ">
             <img style={{ height: 20, width: 20,borderRadius:50 }} src="/favicon.ico" alt="" />
             <div style={{ marginLeft: "5px" }}>{name}</div>
-            <div style={{ marginLeft: "5px" }}>
+            <div className="mq-date" style={{ marginLeft: "5px" }}>
               {new Date(createdAt).toDateString()}
             </div>
           </div>
           <div className=" d-flex flex-row  justify-content-end align-items-center">
-            <Button style={{ cursor:"pointer"}}className="btn btn-primary" onClick={toggleEdit}>
-              <span>{<VscEdit/>}</span>
+            <Button style={{ cursor:"pointer"}}className=" mq-btn btn btn-primary" onClick={toggleEdit}>
+              <VscEdit/>
             </Button>
-            <Button style={{ marginLeft: "5px" }} className="btn btn-danger" onClick={()=>setShowModal(true)}><MdDeleteOutline /></Button>
+            <Button style={{ marginLeft: "5px" }} className="mq-btn btn btn-danger" onClick={()=>setShowModal(true)}><MdDeleteOutline /></Button>
           </div>
         </div>
         
@@ -171,13 +171,13 @@ console.log(commentData)
             />
           </div>
           <Button
-            className="mx-2  border-0 btn btn-primary  border-0"
+            className="mx-2 mq-btn  border-0 btn btn-primary  border-0"
             onClick={commentEditSubmitHandler}
           >
             <MdSend />
           </Button>
           <Button
-            className=" border-0 btn btn-danger  border-0"
+            className="mq-btn border-0 btn btn-danger  border-0"
             onClick={toggleEdit}
           >
             <MdCancelScheduleSend   />
@@ -185,14 +185,14 @@ console.log(commentData)
         </div>
 {showModal && <Confirm showModal={showModal} data={"Comment"} handleCancel ={handleCancel} handleDelete={handleDelete}/>}
         <div className=" d-flex w-75  flex-direction-row justify-content-start ">
-          <div className=" d-flex flex-direction-row justify-content-between ">
+          <div className=" d-flex flex-direction-row justify-content-between align-items-center ">
             {/* <div className="mx-2">Likes</div> <div className="mx-2">shares</div> */}
-            <Button
-              className="mx-2  border-0 btn btn-primary  border-0"
+            <div
+              className="mx-2 border-0  btn-primary  border-0"
               onClick={toggle}
-            >
-              {show ? "Reply" : "Hide"}
-            </Button>
+            >{<MdOutlineModeComment />}
+              {show ? " Reply" : " Hide"}
+            </div>
           </div>
           {!show && (
             <div className="  w-75  ">
@@ -207,9 +207,9 @@ console.log(commentData)
                 />
                 <Button
                   onClick={replySubmitHandler}
-                  className="ms-2 w-50 border-0 btn btn-primary  border-0"
+                  className="ms-2 w-50  border-0 btn btn-primary  border-0"
                 >
-                  write Reply
+                  send
                 </Button>
               </div>
             </div>

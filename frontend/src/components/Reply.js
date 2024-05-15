@@ -114,22 +114,22 @@ const Reply = ({ rply, alldata }) => {
           <div style={{ marginLeft: "5px" }}>{rply.name}</div>
 
           <div
-            className={`"w-25" ${!showReply ? "d-none" : ""}`}
+            className={`" w-25" ${!showReply ? "d-none" : ""} mq-media`}
             style={{ fontSize: "12px", marginLeft: "5px" }}
           >
             {new Date(rply.createdAt).toLocaleDateString()}
           </div>
         </div>
 
-        <div className=" d-flex flex-row  justify-content-end align-items-center">
-          <div className="" onClick={toggleReply} >
+        <div className="mq-btn d-flex flex-row  justify-content-end align-items-center">
+          <div className="mq-btn" onClick={toggleReply} >
             <VscEdit />
           </div>
-          <div onClick={()=>setShowModal(true)}>
+          <div className="mq-btn" onClick={()=>setShowModal(true)}>
             <MdDeleteOutline />
           </div>
           <div
-            className={`d-flex flex-row align-items-center my-3 w-50 ms-2 ${
+            className={` d-flex flex-row align-items-center my-3 w-50 ms-2 ${
               showReply ? "d-none" : ""
             } `}
           ></div>
@@ -142,7 +142,7 @@ const Reply = ({ rply, alldata }) => {
         {rply?.reply}
       </div>
       <div className="d-flex w-75">
-        <div className={`w-100 ${showReply ? "d-none" : ""}`}>
+        <div className={`w-100 ${showReply ? "d-none" : ""} `}>
           <input
             className="  w-50"
             rows="1"
@@ -151,13 +151,13 @@ const Reply = ({ rply, alldata }) => {
           />
 
           <Button
-            className="mx-2  border-0 btn btn-primary  border-0"
+            className=" mx-2  border-0 btn btn-primary  border-0  mq-btn"
             onClick={replyEditSubmitHandler}
           >
             <MdSend />
           </Button>
           <Button
-            className="  border-0 btn btn-danger  border-0"
+            className="  border-0 btn btn-danger  border-0 mq-btn"
             onClick={toggleRply}
           >
             <MdCancelScheduleSend />

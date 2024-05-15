@@ -11,14 +11,14 @@ var date = new Date(updatedAt)
   return (
     <div className='col-12 mb-5 mt-2' >
       <div className="d-flex flex-column w-75 mx-auto justify-content-center align-items-start">
-         <Link to={{ pathname: `/SingleBlog/${blog._id}` }}  style={{color:"blue", textDecorationLine:"none"}} >  {description +" created on "+ date.toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric'}) }</Link>
+         <Link to={{ pathname: `/SingleBlog/${blog._id}` }}  style={{color:"blue",textTransform:"capitalize", textDecorationLine:"none"}} >  {description +" created on "+ date.toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric'}) }</Link>
         <p style={{color:"grey"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis iusto eos at eaque eligendi quam, numquam voluptate maxime perspiciatis accusantium? Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ut.{description}</p>
         <div className="d-flex w-75 justify-content-between">
-        <p style={{color:"grey", padding:" 5px",margin:"0px,2px,0px,2px"}}>{date.toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric'})}</p>
-        <p style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>tags tags tags tags tags </p>
-        <p style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>comments</p>
-        <p style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>likes</p> 
-        <p style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>views</p> 
+        <p className="mq-date" style={{color:"grey", padding:" 5px",margin:"0px,2px,0px,2px"}}>{date.toLocaleString('en-GB', {day:'numeric', month: 'long', year:'numeric'})}</p>
+        <p className="mq-date" style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>tags  </p>
+        <p className="mq-views" style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>comments</p>
+        <p className="mq-date" style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>likes</p> 
+        <p className="mq-views" style={{color:"grey",padding:" 5px",margin:"0px,2px,0px,2px"}}>views</p> 
 
         
      </div>

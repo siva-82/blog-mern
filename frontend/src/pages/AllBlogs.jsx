@@ -14,7 +14,7 @@ import {  useGetBlogsQuery,} from "../slices/blogApiSlice";
 import { useLogoutMutation  } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 
-import { MdPostAdd,MdLogout  } from "react-icons/md"
+import { MdPostAdd,MdLogout ,MdSearch } from "react-icons/md"
 import { Button, Form } from "react-bootstrap";
 
 
@@ -87,13 +87,13 @@ const AllBlogs = () => {
                 onChange={(e) => setSearchBlogs(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Button
-              type="submit"
-              className="mx-2 border-0 btn btn-primary  border-0"
-              style={{ backgroundColor: "#0095F6" }}
-            >
-              search
-            </Button>
+            <MdSearch 
+             
+              className="mx-2"
+              style={{height:'25px',width:'30px'}}
+            />
+             
+            
           </Form>
           
         </div>
@@ -160,13 +160,15 @@ const AllBlogs = () => {
               </>
         }
 
-          {!isLoading &&searchBlogs!=="" && newSearch?.length === 0  &&
+        </div>
+        
+        
+      </div>
+      {!isLoading &&searchBlogs!=="" && newSearch?.length === 0  &&
             <>
-              <div>Search Not Found</div>
+              <div className="d-flex justify-content-center">Search Not Found</div>
             </>
            }
-        </div>
-      </div>
     </>
   );
 };
