@@ -117,7 +117,7 @@ const AllBlogs = () => {
 
       <div className="upc container">
         <div className="row">
-        <div  className=""   >
+        <div  className="d-flex justify-content-center"   >
               <Link className ='UploadBlogContainer'to='/uploadBlog'>
             <MdPostAdd style={{ height: "50px",width:'50px' }} data-bs-toggle="modal" /> {"Add Blog"}
             </Link>
