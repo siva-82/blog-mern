@@ -79,7 +79,7 @@ const date=getBlog?.[0].createdAt
         <div className=" row">
         
           <div className="maxWidth d-flex  flex-column my-auto justify-content-center align-items-start">
-            <div className="col-12 mb-1 mx-auto">
+            <div className="col-lg-12 col-md-6 col-sm-6 mb-1 mx-auto">
               <div className="mt-4 d-flex flex-column mx-auto justify-content-center align-items-center">
                 <div className=" w-75 ">
                   <h2 className="poppin"> Title of {id}</h2>
@@ -123,7 +123,7 @@ const date=getBlog?.[0].createdAt
                 </div>
               </div>
 
-              <div className=" col-12 w-75 mx-auto justify-content-center align-items-start">
+              <div className=" col-lg-12 col-sm-6 col-md-6 w-75 mx-auto justify-content-center align-items-start">
                 <div className=" w-100 mx-auto ">
                   <div className=" poppins my-2 align-self-start">Share you Thoughts</div>
                   <div className="form-group w-75 ">
