@@ -28,7 +28,7 @@ const protect = asyncHandler(async (req, res, next) => {
         }
 
     }else{
-    console.log("auth middleware else",req)
+    console.log("auth middleware else",req.user)
          
         res.status(401);
         throw new Error('Not authorized, no token')
