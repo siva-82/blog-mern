@@ -11,6 +11,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
             query: (postId)=>({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${postId}/comments`,
                 method:'GET',
+                credentials: "include",
             }), 
             providesTags:['Comments']
         }),
@@ -19,6 +20,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${data.id}/comments`,
                 method:'POST',
                 body:data,
+                credentials: "include",
 
             }) ,
             invalidatesTags:['Comments']
@@ -28,6 +30,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/comments/${data.commentId}`,
                 method:'PUT',
                 body:data,
+                credentials: "include",
             }),
             invalidatesTags:['Comments']
 
@@ -37,6 +40,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/comments/${data.commentId}`,
                 method:'DELETE',
                 body:data,
+                credentials: "include",
            
             }) ,
             invalidatesTags:['Comments']
@@ -52,6 +56,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
             query: (data)=>({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/${data.commentId}/replies`,
                 method:'PUT',
+                credentials: "include",
                 body:data,
 
             }), 
@@ -63,6 +68,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/replies/${data.replyId}`,
                 method:'PUT',
                 body:data,
+                credentials: "include",
 
             }), 
             invalidatesTags:['Reply'] 
@@ -71,6 +77,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
             query: (data)=>({
                 url:`${process.env.REACT_APP_BACKEND_URL}/api/posts/replies/${data.replyId}`,
                 method:'DELETE',
+                credentials: "include",
                 body:data,
 
             }), 
