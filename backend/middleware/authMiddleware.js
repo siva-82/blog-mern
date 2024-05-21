@@ -4,7 +4,9 @@ import User from "../models/userModel.js";
 
 const protect = asyncHandler(async (req, res, next) => {
      
-    console.log("auth middleware req",req)
+    console.log("auth middleware req.body",req.body)
+    console.log("auth middleware req.cookie",req.cookies)
+    console.log("auth middleware req.cookie.jwt",req.cookies)
     
     let token;
 
