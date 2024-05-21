@@ -21,6 +21,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 method:'POST',
                 body:data,
                 credentials: "include",
+                mode: 'cors',
 
             }) ,
             invalidatesTags:['Comments']
