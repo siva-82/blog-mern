@@ -22,7 +22,7 @@ console.log(email,password)
         res.status(401)
         throw new Error('Invalid email or password')
     }
-     res.status(200).json({message:'Auth User'})
+   //  res.status(200).json({message:'Auth User'})
 })
 
 const registerUser = asyncHandler(async(req,res)=>{
