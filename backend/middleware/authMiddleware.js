@@ -4,7 +4,7 @@ import User from "../models/userModel.js";
 
 const protect = asyncHandler(async (req, res, next) => {
      
-    console.log("auth middleware",req)
+    console.log("auth middleware req",req)
     
     let token;
 
@@ -26,6 +26,8 @@ const protect = asyncHandler(async (req, res, next) => {
         }
 
     }else{
+    console.log("auth middleware else",req)
+         
         res.status(401);
         throw new Error('Not authorized, no token')
     }
