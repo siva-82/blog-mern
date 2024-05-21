@@ -14,7 +14,7 @@ const generateToken=(res,userId) =>{
         sameSite:'none',
         maxAge:30 * 24 * 60* 60 * 1000
     })
-    console.log(" res.cookie",res.cookie,res)
+    console.log("console res.cookie",res.cookie,res.jwt)
 }
 
 export default generateToken;
