@@ -3,9 +3,12 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 
 const protect = asyncHandler(async (req, res, next) => {
-    // let token;
+     
+    console.log("auth middleware",req)
+    
+    let token;
 
-   const token=req?.cookies?.jwt;
+    token=req?.cookies?.jwt;
     console.log("token middleware",token)
     if(token){
         try {
