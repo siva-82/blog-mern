@@ -8,7 +8,7 @@ const generateToken=(res,userId) =>{
             console.log(process.env.JWT_SECRET)
     console.log(userId)
 
-    res.cookie('jwt', token, {
+  return  res.cookie('jwt', token, {
         httpOnly:true,
         secure:process.env.NODE_ENV !== 'development',
         sameSite:'none',
