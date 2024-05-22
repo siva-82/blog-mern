@@ -61,7 +61,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 body:data,
 
             }), 
-            invalidatesTags:['Reply']
+            invalidatesTags:['Comments']
 
         }),
         updateReply:builder.mutation({
@@ -72,7 +72,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 credentials: "include",
 
             }), 
-            invalidatesTags:['Reply'] 
+            invalidatesTags:['Comments'] 
         }),
         deleteReply:builder.mutation({
             query: (data)=>({
@@ -82,7 +82,7 @@ export const commentReplyApiSlice=apiSlice.injectEndpoints({
                 body:data,
 
             }), 
-            invalidatesTags:['posts'] 
+            invalidatesTags:['Comments'] 
            
         })
 
