@@ -53,8 +53,7 @@ const CommentReply = ({ commentData }) => {
         commentId: commentData?._id,
       };
       let res = await updateComment(updatedValue);
-      console?.log("res");
-      console?.log(res);
+      toast.success(res.message)
     } catch (err) {
       toast.error( err?.data?.message || err);
     }
@@ -71,10 +70,9 @@ const CommentReply = ({ commentData }) => {
         name: commentData?.name,
         reply: newReply,
       };
-console.log("commentData")
-console.log(commentData)
+
       const res = await createReply(updatedValue);
-      console.log(res)
+   
       toast.success(res.data)
 
     } catch (err) {
