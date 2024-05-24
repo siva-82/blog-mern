@@ -47,7 +47,7 @@ const Reply = ({ rply, alldata }) => {
       };
 
       const res = await updateReply(updatedValue);
-      console.log(res);
+      toast.success(res.message)
     } catch (err) {
       console.log("singleBlog catch" + err?.data?.message || err);
     }
