@@ -216,7 +216,7 @@ const CommentReply = ({ commentData }) => {
 
         <div
           className={`my-3 ms-2 ${commentData.replies.length == 0 ? "d-none" : ""}`}
-          onClick={toggleReply}
+          onClick={toggleReply}  style={{ cursor:"pointer"}}
         >
           <span style={{ marginLeft: "5px" }}><MdThumbUpOffAlt/> {250}</span>
           <span style={{ marginLeft: "5px" }}><MdThumbDownOffAlt/>{50}</span>
