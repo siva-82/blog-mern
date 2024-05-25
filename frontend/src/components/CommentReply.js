@@ -187,7 +187,7 @@ const CommentReply = ({ commentData }) => {
             {/* <div className="mx-2">Likes</div> <div className="mx-2">shares</div> */}
             <div
               className="mx-2 border-0  btn-primary  border-0"
-              onClick={toggle}
+              onClick={toggle}  style={{ cursor:"pointer"}}
             >{<MdOutlineModeComment />}
               {show ? " Reply" : " Hide"}
             </div>
