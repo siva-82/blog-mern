@@ -53,7 +53,7 @@ const Register = () => {
         </h3>
       </div>
     <FormContainer>
-      <h1>Sign up to see photos and videos from your friends</h1>
+      <h1>Sign up to interact with writers across the Globe</h1>
       <Form onSubmit={submitHandler}>
       <Form.Group className='my-2' controlId='email'>
         <Form.Control type='email' placeholder='Enter Email' value={email} onChange={ (e) => setEmail(e.target.value)}></Form.Control>
