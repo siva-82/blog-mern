@@ -52,7 +52,6 @@ const UploadBlog = () => {
       <div className="app__header">
         <div>
           <Link to="/allblogs">
-            
             <h3 className="logoBlog">Blog</h3>
           </Link>
         </div>
@@ -60,15 +59,29 @@ const UploadBlog = () => {
         {userInfo?.userName ? (
           // <div onClick={() => auth.signOut()}>Logout</div>
           <div className="app__loginContainer">
-            <div style={{cursor:"pointer",margin: "2px", padding: "8px"}}>{userInfo.userName}</div>
-            <div style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Logout</div>
+            <div style={{ cursor: "pointer", margin: "2px", padding: "8px" }}>
+              {userInfo.userName}
+            </div>
+            <div style={{ cursor: "pointer", margin: "2px", padding: "8px" }}>
+              Logout
+            </div>
           </div>
         ) : (
           <div className="app__loginContainer">
             {/* <div onClick={() => setOpen(true)}>Login</div>
             <div onClick={() => setRegisterOpen(true)}>Sign Up</div> */}
-            <Link to={"/"} style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Login</Link>
-            <Link to={"/register"} style={{cursor:"pointer",margin: "2px", padding: "8px"}}>Sign Up</Link>
+            <Link
+              to={"/"}
+              style={{ cursor: "pointer", margin: "2px", padding: "8px" }}
+            >
+              Login
+            </Link>
+            <Link
+              to={"/register"}
+              style={{ cursor: "pointer", margin: "2px", padding: "8px" }}
+            >
+              Sign Up
+            </Link>
           </div>
         )}
       </div>

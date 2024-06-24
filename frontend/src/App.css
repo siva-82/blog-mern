@@ -1,224 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.searchBar{
- 
-   height:"200px" !important;
-   
+.searchBar {
+  height: "200px" !important;
 }
 .poppin {
   font-family: "Poppins", sans-serif;
-  font-style: normal
+  font-style: normal;
 }
-.maxWidth{
+.maxWidth {
   max-width: 1000px !important;
   display: flex;
   justify-content: center;
-   align-items: center;
-   margin-left: auto;
-   margin-right: auto;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .app__header {
-   background-color: white;
-   padding: 20px;
-   border-bottom: 1px solid lightgray;
-   object-fit: contain;
-   display: flex;
-   position: sticky;
-   z-index: 1;
-   top: 0;
-   justify-content: space-between;
-   align-items: center;
-   margin-left: auto;
-   margin-right: auto;
- }
- .app__header :Link, h3{
+  background-color: white;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+  object-fit: contain;
+  display: flex;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.app__header :link,
+h3 {
   text-decoration: none;
-color:black; transition: 0.3s;}
+  color: black;
+  transition: 0.3s;
+}
 
 .logoBlog {
-  
-  background: linear-gradient(45deg,#81dce8, #2a7cf8,#0f3368);
+  background: linear-gradient(45deg, #81dce8, #2a7cf8, #0f3368);
   background-clip: text;
   color: transparent;
 }
- .app__loginContainer{
-   display: flex;
-   flex-direction: row;
-   margin: 2px;
-   padding: 2px;
-   align-items: center;
- }
- 
- 
-  .app__loginContainer a:hover{
+.app__loginContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+  padding: 2px;
+  align-items: center;
+}
+
+.app__loginContainer a:hover {
   border: 1px;
   border-radius: 8px;
   background-color: #2a7cf8;
   color: white !important;
   cursor: pointer;
 }
- .show_reply{
+.show_reply {
   background-color: Transparent;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   border: none;
-  cursor:pointer !important
+  cursor: pointer !important;
 }
-.comment__card{
-  border: 1px grey ;
+.comment__card {
+  border: 1px grey;
 
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
-.upc{
+.upc {
   position: relative;
-  
 }
-.UploadBlogContainer{
-  position:fixed !important;
+.UploadBlogContainer {
+  position: fixed !important;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   transition: 0.3s;
   /* top:25%; */
-  padding: 0 8px ;
+  padding: 0 8px;
   right: 2%;
   color: rgb(5, 104, 5);
 }
-.UploadBlogContainer:hover{
+.UploadBlogContainer:hover {
   /* background-color: #2a7cf8; */
   background-color: rgb(5, 104, 5);
-  padding:0 8px;
+  padding: 0 8px;
   border-radius: 3px;
   color: white;
 }
-.tagContainer{
+.tagContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 40px;
   align-items: center;
 }
-.tags{
+
+.tags {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+
   max-width: 70ch;
   white-space: nowrap;
-  width:75px;
+  width: 75px;
   border: 1px solid grey;
   border-radius: 10px;
   padding: 5px;
   margin-right: 5px;
   transition: 0.3s;
 }
-.tags:hover{
+.tags:hover {
   border: none;
   background-color: #2a7cf8;
-  
+
   color: white;
   cursor: pointer;
 }
-.tags.active{
+.tags.active {
   border: none;
   background-color: #2a7cf8;
   color: white;
   cursor: pointer;
 }
 
-@media (max-width:480px){
-  .mq-media{
+@media (max-width: 480px) {
+  .mq-media {
     display: none;
   }
-  .searchbar{
+  .searchbar {
     width: 100px;
-  }  
-  .searchbar svg{
+  }
+  .searchbar svg {
     height: 30px !important;
-    width:65px  !important;
+    width: 65px !important;
   }
- .mq-date{
-  font-size: 12px;
- }
+  .mq-date {
+    font-size: 12px;
+  }
 
- .mq-views{
-  display: none !important;
- } 
-.UploadBlogContainer {
-  position:static !important;
-  justify-content: center;
-}
-.tagContainer{
-  width:25px;
-  height:30px;
-  font-size: 10px;
+  .mq-views {
+    display: none !important;
   }
-  .tags{
+  .UploadBlogContainer {
+    position: static !important;
+    justify-content: center;
+  }
+  .tagContainer {
+    width: 25px;
+    height: 30px;
+    font-size: 10px;
+  }
+  .tags {
     border-radius: 5px;
   }
-  .mq-btn{
-    
-      height: 25px;
-      /* width: 30px; */
-  
+  .mq-btn {
+    height: 25px;
+    /* width: 30px; */
   }
-  .mq-btn svg{
-    
+  .mq-btn svg {
     height: 14px !important;
     width: 12px !important;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
-
   }
 }
-@media (min-width:481px) and (max-width:768px){
-  .mq-media{
+@media (min-width: 481px) and (max-width: 768px) {
+  .mq-media {
     display: none;
   }
-  .searchbar{
+  .searchbar {
     width: 100px;
-  }  
-  .searchbar svg{
+  }
+  .searchbar svg {
     height: 30px !important;
-    width:65px  !important;
+    width: 65px !important;
   }
- .mq-date{
-  font-size: 12px;
- }
+  .mq-date {
+    font-size: 12px;
+  }
 
- .mq-views{
-  display: none !important;
- } 
-.UploadBlogContainer {
-  position:static !important;
-  justify-content: center;
-}
-.tagContainer{
-  width:25px;
-  height:30px;
-  font-size: 10px;
+  .mq-views {
+    display: none !important;
   }
-  .tags{
+  .UploadBlogContainer {
+    position: static !important;
+    justify-content: center;
+  }
+  .tagContainer {
+    width: 25px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .tags {
     border-radius: 5px;
   }
-  .mq-btn{
+  .mq-btn {
     height: 25px;
   }
-  .mq-btn svg{
-    
+  .mq-btn svg {
     height: 14px !important;
     width: 12px !important;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
-
   }
 }
-/* @media (min-width:769px) and (max-width:1024px){
+/*  
 
   .searchbar{
     width: 100px;

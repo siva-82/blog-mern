@@ -8,6 +8,7 @@ import { setCredentials } from "../slices/authSlice";
 import { searchBlog, clearSearchBlog } from "../slices/blogSlice";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
+import Loader from "../components/ui/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("john@gmail.com");
@@ -44,9 +45,12 @@ const Login = () => {
   const logoHandle = () => navigate("/allblogs");
   return (
     <>
-      
       <div className="app__header">
-        <h3 className="logoBlog" style={{ cursor: "pointer" }} onClick={logoHandle}>
+        <h3
+          className="logoBlog"
+          style={{ cursor: "pointer" }}
+          onClick={logoHandle}
+        >
           Blog
         </h3>
       </div>
@@ -76,7 +80,7 @@ const Login = () => {
           >
             Sign In
           </Button>
-
+          {isLoading && <Loader />}
           <Row className="py-3">
             <Col>
               Don't have an account? <Link to="/register">Sign up</Link>

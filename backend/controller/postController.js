@@ -8,7 +8,7 @@ import { response } from "express";
 // @access  Public
 const getPosts = asyncHandler(async (req, res) => {
   const post = await Post.find({});
-  
+
   res.status(200).json(post);
 });
 
@@ -22,20 +22,18 @@ const getSinglePost = asyncHandler(async (req, res) => {
 // @route   POST /api/posts/:post_id/comment
 // @access  Private
 const createComment = asyncHandler(async (req, res) => {
-  
-
   const { comment, userName, userId } = req.body;
 
   const post = await Post.findById(req.params.post_id);
-  
- if (post) {
+
+  if (post) {
     const userComment = {
       postId: req.params.post_id,
       comment_By: userId,
-      name:userName,
+      name: userName,
       comment,
     };
-     post.comments.push(userComment);
+    post.comments.push(userComment);
 
     await post.save();
     res.status(201).json({ post, message: "Comment added" });
@@ -43,25 +41,20 @@ const createComment = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Post Not Found");
   }
-  
-
 });
 
 // @desc    Update a comment
 // @route   PUT /api/posts/:post_id/comment
 // @access  Private/Admin
 const updateComment = asyncHandler(async (req, res) => {
- 
-
   const post = await Post.findById(req.body.postId);
 
   if (post) {
-
     const cmt = post.comments.find((d) => d.id === req.params.commentId);
 
     cmt.comment = req.body.comment;
 
-    await post.save( cmt);
+    await post.save(cmt);
     res.json({ message: "Comment Updated" });
   } else {
     res.status(404);
@@ -72,30 +65,25 @@ const updateComment = asyncHandler(async (req, res) => {
 // @route   DELETE /api/posts/:id
 // @access  Private/Admin
 const deleteComment = asyncHandler(async (req, res) => {
-  
   const posts = await Post.findById(req.body.postId);
 
-  if(posts){
+  if (posts) {
     const cmtt = posts.comments.find((d) => d.id === req.params.commentId);
-    cmtt.deleteOne({id:req.params.commentId})
-    
-  
-   
-    await posts.save()
-     res.json({ message: "Comment Deleted" })
+    cmtt.deleteOne({ id: req.params.commentId });
 
-  // }
-//   if (comments) {
+    await posts.save();
+    res.json({ message: "Comment Deleted" });
+
+    // }
+    //   if (comments) {
     // await Post.updateOne(
     //   { _id: req.body.postId },
     //   { $pull: { comments: { _id: req.params.commentId } } },
     //   { new: true }
     // );
 
-    
     res.json({ message: "Comment Deleted" });
-  }
-   else {
+  } else {
     res.status(404);
     throw new Error("Comment not found");
   }
@@ -105,17 +93,13 @@ const deleteComment = asyncHandler(async (req, res) => {
 // @route   POST /api/posts/post_id/:comment_id/reply
 // @access  Private
 const createReply = asyncHandler(async (req, res) => {
-  
   const { reply, postId, commentId, name, replied_By } = req.body;
   const commentParam = req.params.comment_id;
   const post = await Post.findById(postId);
 
-
-
   if (post) {
-    
     const commentId = await post.comments.find((d) => d.id === commentParam);
-   
+
     if (commentId) {
       const userReply = {
         postId: postId,
@@ -124,8 +108,6 @@ const createReply = asyncHandler(async (req, res) => {
         name,
         reply,
       };
-
-      
 
       commentId.replies.push(userReply);
 
@@ -141,15 +123,13 @@ const createReply = asyncHandler(async (req, res) => {
 // @route   PUT /api/:postId/reply/:id
 // @access  Private/Admin
 const updateReply = asyncHandler(async (req, res) => {
- 
-  
   const post = await Post.findById(req.body.postId);
 
   const comment = post.comments.find((d) => d.id === req.body.commentId);
   const rply = comment.replies.find((r) => r.id === req.params.replyId);
 
   if (rply) {
-    rply.reply=req.body.reply    
+    rply.reply = req.body.reply;
     // await Post.updateOne(
     //   { _id: req.body.postId, "comments._id": req.body.commentId },
     //   { $set: { "comments.$.replies": { reply: req.body.reply } } }
@@ -166,7 +146,6 @@ const updateReply = asyncHandler(async (req, res) => {
 // @route   DELETE /api/posts/:id
 // @access  Private/Admin
 const deleteReply = asyncHandler(async (req, res) => {
-  
   const post = await Post.findById(req.body.postId);
 
   const comment = post.comments.find((d) => d.id === req.body.commentId);
@@ -177,8 +156,8 @@ const deleteReply = asyncHandler(async (req, res) => {
     //   { _id: req.body.postId, "comments._id": req.body.commentId },
     //   { $pull: { "comments.$.replies": { _id: req.params.replyId } } }
     // );
-    reply.deleteOne({id:req.params.replyId})
-    await post.save()
+    reply.deleteOne({ id: req.params.replyId });
+    await post.save();
     res.json({ message: "Reply Deleted" });
   } else {
     res.status(404);
@@ -207,7 +186,6 @@ const deletePost = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updatePost = asyncHandler(async (req, res) => {
   const { name, image, description } = req.body;
-  
 
   const post = await Post.findById(req.param.id);
 
@@ -237,6 +215,3 @@ export {
   updatePost,
   deletePost,
 };
-
-
-  

@@ -232,7 +232,7 @@ console.log(commentData)
                 <Reply rply={rply} alldata={commentData} />
               </div>
             </div>
-          ))}
+          )).reverse()}
       </div>
       </div>
     </>

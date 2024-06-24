@@ -40,18 +40,13 @@ const uploadSingleImage = upload.single("image");
 // @desc    Create new blog
 // @route   POST /api/blogs/
 router.post("/", async (req, res) => {
-  console.log("upload/ ");
   uploadSingleImage(req, res, async function (err) {
-    console.log(req.body)
-    console.log(req.file)
-    res.status(200).send({
-      message: "Image uploaded sucessfully",
-      image: `/${req.file.path}`,
-      file: req.file,
-    });
+    // res.status(200).send({
+    //   message: "Image uploaded sucessfully",
+    //   image: `/${req.file.path}`,
+    //   file: req.file,
+    // });
     try {
-      console.log("try");
-     
       const result = await cloudinary.uploader.upload(req.file.path);
 
       const post = new Post({
@@ -65,16 +60,10 @@ router.post("/", async (req, res) => {
         cloudinary_id: result.public_id,
       });
       await post.save();
-      console?.log("result")
-      console?.log(result)
-      console?.log("post")
-      console?.log(post)
       res.json(post);
-      
     } catch (error) {
       console.log("catch");
       console.log(error);
-     
     }
   });
 });
@@ -82,30 +71,25 @@ router.post("/", async (req, res) => {
 // @desc    Update a blog
 // @route   PUT /api/blog/:id
 router.put("/:id", async (req, res) => {
- 
   uploadSingleImage(req, res, async function (err) {
-     
-
-   if(req.file){
-    res.status(200).send({
-      message: "Image uploaded sucessfully",
-      image: `/${req.file.path}`,
-      file: req.file,
-    });
-   }
+    if (req.file) {
+      // res.status(200).send({
+      //   message: "Image uploaded sucessfully",
+      //   image: `/${req.file.path}`,
+      //   file: req.file,
+      // });
+    }
     try {
-      
-
       let post = await Post.findById(req.params.id);
-      
-let result
+
+      let result;
       if (post) {
-        if(req.file){
+        if (req.file) {
           await cloudinary.uploader.destroy(post.cloudinary_id);
 
-        result = await cloudinary.uploader.upload(req.file.path);
-        post.image = result.secure_url 
-        post.cloudinary_id = result.public_id 
+          result = await cloudinary.uploader.upload(req.file.path);
+          post.image = result.secure_url;
+          post.cloudinary_id = result.public_id;
         }
 
         post.name = req.body.userName || post.name;
@@ -114,17 +98,17 @@ let result
         post.title = req.body.title || post.title;
         post.description = req.body.description || post.description;
 
-       if(!result){
-        post.image =  post.image;
-        post.cloudinary_id = post.cloudinary_id;
-       }
+        if (!result) {
+          post.image = post.image;
+          post.cloudinary_id = post.cloudinary_id;
+        }
 
         const updatePost = await post.save();
 
         res.json(updatePost);
-      }else {
+      } else {
         res.status(404);
-        throw new Error('Post not found');
+        throw new Error("Post not found");
       }
     } catch (error) {
       console.log("catch");
@@ -136,35 +120,22 @@ let result
 // @desc    Delete a blog
 // @route   DELETE /api/blogs/:id
 router.delete("/:id", async (req, res) => {
-  console.log("upload/:id ");
+  try {
+    let post = await Post.findById(req.params.id);
 
-  console.log(req.params.id);
- 
-    try {
-    
-      let post = await Post.findById(req.params.id);
-      console.log("post");
-      console.log(post);
+    if (post) {
+      await cloudinary.uploader.destroy(post.cloudinary_id);
 
-      if (post) {
-        await cloudinary.uploader.destroy(post.cloudinary_id);
-
-        await post.deleteOne({ _id: post._id });
-      res.json({ message: 'Post Deleted' });
-
-        
-      }else {
-        res.status(404);
-        throw new Error('Post not found');
-      }
-    } catch (error) {
-      console.log("catch");
-      console.log(error);
+      await post.deleteOne({ _id: post._id });
+      res.json({ message: "Post Deleted" });
+    } else {
+      res.status(404);
+      throw new Error("Post not found");
     }
-
+  } catch (error) {
+    console.log("catch");
+    console.log(error);
+  }
 });
 
 export default router;
-
-
-// https://github.com/login?client_id=0120e057bd645470c1ed&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3D0120e057bd645470c1ed%26code_challenge%3DaTAua_kOwPAfF6pf1NWKOCLHeefvm1NAlvGkfW7T-1o%26code_challenge_method%3DS256%26redirect_uri%3Dhttp%253A%252F%252F127.0.0.1%253A53274%252F%26response_type%3Dcode%26scope%3Drepo%2Bgist%2Bworkflow%26state%3Dbd0e36c8434e4f4e8e4f9f43542d6588
