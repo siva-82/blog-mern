@@ -79,8 +79,9 @@ const Login = () => {
             style={{ backgroundColor: "#0095F6" }}
           >
             Sign In
+            {isLoading && <Loader />}
           </Button>
-          {isLoading && <Loader />}
+          
           <Row className="py-3">
             <Col>
               Don't have an account? <Link to="/register">Sign up</Link>
@@ -94,12 +95,4 @@ const Login = () => {
 
 export default Login;
 
-// "server":{
-//   "port":3000,
-//   "proxy":{
-//     "/api":{
-//       "target":"http://localhost:5000",
-//       "changeOrigin":"true"
-//     }
-//   }
-// }
+

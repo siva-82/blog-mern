@@ -2,7 +2,7 @@ import { apiSlice } from "./apiSlice";
 const BLOGS_URL = "/api/allBlogs";
 const CREATE_BLOG_URL = "api/upload/";
 
-console.log("BlogApiSlice");
+
 
 export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

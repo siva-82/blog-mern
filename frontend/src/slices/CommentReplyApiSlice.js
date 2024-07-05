@@ -1,7 +1,6 @@
 import { apiSlice } from "./apiSlice";
 const BLOG_COMMENT_URL = "api/posts/";
 
-console.log("commentReplyApiSlice");
 export const commentReplyApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getComments: builder.query({
