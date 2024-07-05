@@ -59,48 +59,22 @@ const Register = () => {
           Blog
         </h3>
       </div>
-      <FormContainer>
-        <h1>Sign up to see photos and videos from your friends</h1>
-        <Form onSubmit={submitHandler}>
-          <Form.Group className="my-2" controlId="email">
-            <Form.Control
-              type="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="name">
-            <Form.Control
-              type="Name"
-              placeholder="Enter Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="userName">
-            <Form.Control
-              type="Name"
-              placeholder=" UserName"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="Password">
-            <Form.Control
-              type="password"
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button
-            type="submit"
-            className="mt-3 w-100 border-0"
-            style={{ backgroundColor: "#0095F6" }}
-          >
-            Sign In
-          </Button>
+    <FormContainer>
+      <h1>Sign up to interact with writers across the Globe</h1>
+      <Form onSubmit={submitHandler}>
+      <Form.Group className='my-2' controlId='email'>
+        <Form.Control type='email' placeholder='Enter Email' value={email} onChange={ (e) => setEmail(e.target.value)}></Form.Control>
+      </Form.Group>
+       <Form.Group className='my-2' controlId='name'>
+        <Form.Control type='Name' placeholder='Enter Name' value={name} onChange={ (e) => setName(e.target.value)}></Form.Control>
+      </Form.Group>
+      <Form.Group className='my-2' controlId='userName'>
+        <Form.Control type='Name' placeholder=' UserName' value={userName} onChange={ (e) => setUserName(e.target.value)}></Form.Control>
+      </Form.Group>
+      <Form.Group className='my-2' controlId='Password'> 
+        <Form.Control type='password' placeholder='Enter Password' value={password} onChange={ (e) => setPassword(e.target.value)}></Form.Control>
+      </Form.Group>  
+     <Button type='submit'  className='mt-3 w-100 border-0' style={{backgroundColor:	"#0095F6"}}>Sign In</Button>
 
           <Row className="py-3">
             <Col>

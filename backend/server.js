@@ -15,10 +15,10 @@ import blogRoutes from "./routes/blogRoutes.js";
 connectDB();
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cors({origin:["https://blog-mern-u4w1.onrender.com"],credentials:true}))
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);

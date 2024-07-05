@@ -53,8 +53,7 @@ const CommentReply = ({ commentData }) => {
         commentId: commentData?._id,
       };
       let res = await updateComment(updatedValue);
-      console?.log("res");
-      console?.log(res);
+      toast.success(res.message)
     } catch (err) {
       toast.error( err?.data?.message || err);
     }
@@ -71,10 +70,9 @@ const CommentReply = ({ commentData }) => {
         name: commentData?.name,
         reply: newReply,
       };
-console.log("commentData")
-console.log(commentData)
+
       const res = await createReply(updatedValue);
-      console.log(res)
+   
       toast.success(res.data)
 
     } catch (err) {
@@ -189,7 +187,7 @@ console.log(commentData)
             {/* <div className="mx-2">Likes</div> <div className="mx-2">shares</div> */}
             <div
               className="mx-2 border-0  btn-primary  border-0"
-              onClick={toggle}
+              onClick={toggle}  style={{ cursor:"pointer"}}
             >{<MdOutlineModeComment />}
               {show ? " Reply" : " Hide"}
             </div>
@@ -218,7 +216,7 @@ console.log(commentData)
 
         <div
           className={`my-3 ms-2 ${commentData.replies.length == 0 ? "d-none" : ""}`}
-          onClick={toggleReply}
+          onClick={toggleReply}  style={{ cursor:"pointer"}}
         >
           <span style={{ marginLeft: "5px" }}><MdThumbUpOffAlt/> {250}</span>
           <span style={{ marginLeft: "5px" }}><MdThumbDownOffAlt/>{50}</span>
