@@ -8,7 +8,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query({
       query: () => ({
-        url: `/api/posts`,
+        url: `${process.env.REACT_APP_BACKEND_URL}/api/posts`,
         method: "GET",
       }),
       providesTags: ["Comments"],

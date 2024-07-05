@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { setCredentials } from "../slices/authSlice";
@@ -79,7 +79,13 @@ const Login = () => {
             style={{ backgroundColor: "#0095F6" }}
           >
             Sign In
-            {isLoading && <Loader />}
+            {isLoading && (
+            <Spinner
+              className="mx-2"
+              style={{ height: "25px", width: "25px" }}
+              animation="border"
+            />
+          )}
           </Button>
           
           <Row className="py-3">
