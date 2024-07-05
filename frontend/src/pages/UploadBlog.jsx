@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const UploadBlog = () => {
   const imgRef=useRef()
+  const navigate=useNavigate()
   const { userInfo, isLoadingUser } = useSelector((state) => state?.auth);
 
   const [addBlog, { isLoading: isLoadingBlog, isError: isErrorBlog }] =
@@ -48,7 +49,9 @@ const UploadBlog = () => {
       setTitle("")
       setDescription("")
       setMainPost("")
-      imgRef.current.value("")
+      setImage(null)
+      imgRef.current.value=""
+      navigate('/allblogs')
     } catch (err) {
       console.log("BloG submitHandler res catch" + e?.data?.message || err);
     }
