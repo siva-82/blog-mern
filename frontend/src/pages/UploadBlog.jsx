@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { useAddBlogMutation } from "../slices/blogApiSlice";
 import "../App.css";
+import { toast } from "react-toastify";
 
 const UploadBlog = () => {
+  const imgRef=useRef()
   const { userInfo, isLoadingUser } = useSelector((state) => state?.auth);
 
   const [addBlog, { isLoading: isLoadingBlog, isError: isErrorBlog }] =
@@ -42,6 +44,11 @@ const UploadBlog = () => {
     // }
     try {
       const res = await addBlog(formData);
+      toast.success(res.message)
+      setTitle("")
+      setDescription("")
+      setMainPost("")
+      imgRef.current.value("")
     } catch (err) {
       console.log("BloG submitHandler res catch" + e?.data?.message || err);
     }
@@ -116,6 +123,7 @@ const UploadBlog = () => {
           </Form.Group>
           <Form.Group className="my-2" controlId="image">
             <Form.Control
+            ref={imgRef}
               type="file"
               placeholder="choose image"
               onChange={imgHandle}
@@ -126,7 +134,13 @@ const UploadBlog = () => {
             className="mt-3 w-100 border-0"
             style={{ backgroundColor: "#0095F6" }}
           >
-            Upload
+            Upload{isLoadingBlog && (
+            <Spinner
+              className="mx-2"
+              style={{ height: "25px", width: "25px" }}
+              animation="border"
+            />
+          )}
           </Button>
         </Form>
       </FormContainer>
