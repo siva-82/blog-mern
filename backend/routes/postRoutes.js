@@ -17,22 +17,12 @@ import {
 const router = express.Router();
 
 router.route("/").get(getPosts);
-router
-  .route("/:id")
-  .get(getSinglePost)
-  .put(protect, updatePost)
-  .delete(protect, deletePost);
+router.route("/:id").get(getSinglePost).put(updatePost).delete(deletePost);
 
-router.route("/:post_id/comments").post(protect, createComment);
-router
-  .route("/comments/:commentId")
-  .put(protect, updateComment)
-  .delete(protect, deleteComment);
+router.route("/:post_id/comments").post(createComment);
+router.route("/comments/:commentId").put(updateComment).delete(deleteComment);
 
-router.route("/:comment_id/replies").put(protect, createReply);
-router
-  .route("/replies/:replyId")
-  .put(protect, updateReply)
-  .delete(protect, deleteReply);
+router.route("/:comment_id/replies").put(createReply);
+router.route("/replies/:replyId").put(updateReply).delete(deleteReply);
 
 export default router;
